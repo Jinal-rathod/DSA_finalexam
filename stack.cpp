@@ -1,66 +1,92 @@
 #include <iostream>
 using namespace std;
 
-#define n 100
-
 class Stack
 {
-    int *arr;
-    int top;
-
 public:
-    Stack()
+    int *arr;
+    int index;
+    int size;
+
+    Stack(int n)
     {
+        this->size = n;
         arr = new int[n];
-        top = -1;
+        index = -1;
     }
 
-    void push(int x)
+    void push(int data)
     {
-        if (top == n - 1)
+        if (index < this->size)
         {
-            cout << "Stack overflow" << endl;
-            return;
+            arr[++index] = data;
         }
-        top++;
-        arr[top] = x;
+        else
+        {
+            cout << "ERROR" << endl;
+        }
     }
 
     void pop()
     {
-        if (top == -1)
+        if (index != -1)
         {
-            cout << "<no element to pop" << endl;
-            return;
+            arr[index--] = -1;
         }
-        top--;
+        else
+        {
+            cout << "ERROR" << endl;
+        }
     }
 
-    int Top()
+    int top()
     {
-        if (top == -1)
+        if (index != -1)
         {
-            cout << "<no element to stack" << endl;
-            return -1;
+            return arr[index];
         }
-        return arr[top];
+        else
+        {
+            cout << "ERROR" << endl;
+        }
     }
 
-    bool empty()
+    int length()
     {
-        return top == -1;
+        return index + 1;
+    }
+
+    bool isEmpty()
+    {
+        if (index == -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void print()
+    {
+        for (int i = 0; i <= this->index; i++)
+        {
+            cout << arr[i] << endl;
+        }
     }
 };
 
-int main()
+main()
 {
-    Stack *sk = new Stack();
-    sk->push(1);
-    sk->push(2);
-    sk->push(3);
-    sk->push(4);
-    sk->pop();
-
-    cout << sk->Top() << endl;
+    Stack *stk = new Stack(3);
+    stk->push(10);
+    stk->push(20);
+    stk->push(30);
+    stk->pop();
+    cout << stk->top();
+    cout << stk->length();
+    cout<<stk->isEmpty();
+    stk->print();
     return 0;
 }
