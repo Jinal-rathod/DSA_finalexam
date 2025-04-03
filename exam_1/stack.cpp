@@ -15,11 +15,11 @@ public:
         index = -1;
     }
 
-    void push(int val)
+    void push(int data)
     {
         if (index < this->size)
         {
-            arr[++index] = val;
+            arr[++index] = data;
         }
         else
         {
